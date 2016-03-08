@@ -13,6 +13,4 @@ class BadgesController < ApplicationController
     end
   end
 
-  def
-
 end
