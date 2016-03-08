@@ -1,28 +1,24 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link rel="stylesheet" type="text/css" href="css/main.css">
-  <script src="js/app.js"></script>
   <script src="js/miniQuery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+  <script src="js/app.js"></script>
+
   <title>SPABadge</title>
 </head>
 <body>
+  <script id= "teachers-template" type = "text/x-handlebars-template">
+    {{#each teachers}}
+      <li id = {{this.id}}>
+        <a href="localhost:3000/{{this.id}}">{{this.name}}</a>
+      </li>
+   </script>
   <div class="container">
     <div class="logo">
       <h1> SPA Badge </h1>
     </div>
     <h1> SF Teachers </h1>
-      <ul>
-        <li><a href="#">Anne</a></li>
-        <li><a href="#">Derek</a></li>
-        <li><a href="#">Hunter</li>
-        <li><a href="#">Jen</a></li>
-        <li><a href="#">Julian</a></li>
-        <li><a href="#">Sarah</a></li>
-        <li><a href="#">Shambhavi</a></li>
-        <li><a href="#">Walker</a></li>
-        <li><a href="sample-page.html">Sample Page</a></li>
-      </ul>
   </div>
 </body>
 </html>

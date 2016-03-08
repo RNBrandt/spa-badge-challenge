@@ -1,5 +1,5 @@
 class Badge < ActiveRecord::Base
-  belong_to :teachers
+  belongs_to :teachers
 
   def upvote
     self.points += 1

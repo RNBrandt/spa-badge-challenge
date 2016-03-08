@@ -24,24 +24,24 @@
     }
   }
   var hide = function(element){
-     SweetSelector.select(element).style.visibility = 'hidden';
+     select(element).style.visibility = 'hidden';
     };
   var show = function(element){
-     SweetSelector.select(element).style.visibility = 'visible';
+     select(element).style.visibility = 'visible';
     };
 
   var addClass = function(element, klass){
-    SweetSelector.select(element).className += " " + klass;
+    select(element).className += " " + klass;
   };
   var removeClass = function(element, klass){
-    SweetSelector.select(element).className= SweetSelector.select(element).className.replace( /(?:^|\s)klass(?!\S)/g , '' )
+    select(element).className= SweetSelector.select(element).className.replace( /(?:^|\s)klass(?!\S)/g , '' )
   };
   var on = function (element, eventName, eventFunction){
-    SweetSelector.select(element).addEventListener(eventName, eventFunction);
+    select(element).addEventListener(eventName, eventFunction);
   };
   var trigger= function (element, eventName) {
     var event = new Event(eventName);
-    SweetSelector.select(element).dispatchEvent(event);
+    select(element).dispatchEvent(event);
   };
   var request = function(ajaxObject){
     return new Promise(function(resolve, reject){
@@ -64,9 +64,10 @@
   var ready = function (callback) {
     switch (document.readyState) {
       case "loading" :
-        document.addEventListener("DOMContentLoaded", callback());
+        document.addEventListener("DOMContentLoaded", callback);
         break;
       case "complete":
+        // console.log("")
         callback();
         break;
     };
@@ -74,17 +75,20 @@
 
   var append = function (element, child)
   {
-    SweetSelector.select(element).appendChild(child);
+    select(element).appendChild(child);
   };
-
+  var html = function (element)
+  {
+    select(element).innerHTML;
+  }
   var replaceHTML = function (element, newContent)
   {
-    SweetSelector.select(element).innerHTML = newContent;
+    select(element).innerHTML = newContent;
   };
 
   var replaceValue = function (element, newContent)
   {
-    SweetSelector.select(element).src = newContent;
+    select(element).src = newContent;
   };
   // var SweetSelector = (function(){
   //   return {
@@ -124,7 +128,8 @@
       ready: ready,
       append: append,
       replaceHTML: replaceHTML,
-      replaceValue: replaceValue
+      replaceValue: replaceValue,
+      html: html
     }
  })();
 
