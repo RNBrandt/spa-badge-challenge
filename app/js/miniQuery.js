@@ -29,7 +29,10 @@
   var show = function(element){
      select(element).style.visibility = 'visible';
     };
-
+  var remove = function(element){
+    console.log ("removing");
+    select(element).parentNode.removeChild(select(element));
+  }
   var addClass = function(element, klass){
     select(element).className += " " + klass;
   };
@@ -96,31 +99,7 @@
   {
     select(element).src = newContent;
   };
-  // var SweetSelector = (function(){
-  //   return {
-  //     select: select
-  //   }
-  // })();
-  // var DOM = (function(){
-  //     return {
-  //       hide: hide,
-  //       show: show,
-  //       addClass: addClass,
-  //       removeClass: removeClass
-  //     }
-  // })();
-  // var EventDispatcher = (function(){
 
-  //   return {
-  //     on: on,
-  //     trigger: trigger
-  //   }
-  // })();
-  // var AjaxWrapper = (function(){
-  // return {
-  //   request: request
-  // }
-  // })();
 
   return {
       select: select,
@@ -134,6 +113,7 @@
       request: request,
       ready: ready,
       append: append,
+      remove: remove,
       replaceHTML: replaceHTML,
       replaceValue: replaceValue,
       html: html

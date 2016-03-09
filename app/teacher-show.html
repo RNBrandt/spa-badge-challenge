@@ -1,7 +1,7 @@
 <script id="badges-template" type="text/x-handlebars-template">
-  {{#each badges}}
-<h2> Look at your Super Awesome Badges </h2>
 
+<h2> Look at your Super Awesome Badges </h2>
+{{#each badges}}
 <div id="badge-{{id}}" class="slogan">
   <div class="body"> {{name}}</div>
   <div class="vote-on">
@@ -24,8 +24,18 @@
   </div>
 
   <div class="points">
-    (25 points)
+    {{points}} points
   </div>
+</div>
+{{/each}}
+
+<div class="add-badge">
+  <h3> Add a Badge: </h3>
+  <form action="#">
+    <input type="hidden" name="teacher_id" value={{teacher_id}} />
+    <input type="text" name="content" />
+    <input type="image" src="img/add_button.png" alt="Add Slogan" />
+  </form>
 </div>
 </script>
 

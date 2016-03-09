@@ -20,6 +20,47 @@
       </ul>
 
    </script>
+
+<script id="badges-template" type="text/x-handlebars-template">
+
+<h2> Look at your Super Awesome Badges </h2>
+{{#each badges}}
+<div id="badge-{{id}}" class="slogan">
+  <div class="body"> {{name}}</div>
+  <div class="vote-on">
+    <form action="http://localhost:3000/teachers/{{teacher_id}}/badges/{{id}}">
+      <input type="hidden" name="slogan_id" value={{id}}>
+      <input type="hidden" name="vote_type" value="up">
+      <button class="up" type="submit" name="submit">
+        <img src="img/upvote.gif" alt="upvote_image" />
+      </button>
+    </form>
+  </div>
+  <div class="vote-on">
+    <form action="http://localhost:3000/teachers/{{teacher_id}}/badges/{{id}}">
+      <input type="hidden" name="slogan_id" value={{id}}>
+      <input type="hidden" name="vote_type" value="down">
+      <button class="down" type="submit" name="submit">
+          <img src="img/downvote.gif" alt="downvote_image" />
+      </button>
+    </form>
+  </div>
+
+  <div class="points">
+    {{points}} points
+  </div>
+</div>
+{{/each}}
+
+<div class="add-badge">
+  <h3> Add a Badge: </h3>
+  <form action="#">
+    <input type="hidden" name="teacher_id" value={{teacher_id}} />
+    <input type="text" name="content" />
+    <input type="image" src="img/add_button.png" alt="Add Slogan" />
+  </form>
+</div>
+</script>
   <div class="container">
     <div class="logo">
       <h1>SPA Badge </h1>

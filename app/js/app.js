@@ -20,23 +20,40 @@ var listTeachers = function(teachers){
   var theTeachersScript = $.select("#teachers-template").innerHTML;
   var theTeachersTemplate= Handlebars.compile(theTeachersScript);
   var theCompiledHtml = theTeachersTemplate(teachers);
-  var div = document.createElement('div')
+  var div = document.createElement('div');
   div.innerHTML = theCompiledHtml;
   miniQuery.select("#teacher-header").appendChild(div);
-  miniQuery.onClass('.teacher', "click", pullBadges)
-
-  // miniQuery.append("#teacher-header", theCompiledHtml );
+  miniQuery.onClass('.teacher', "click", pullBadges);
 };
 
 var pullBadges = function(e){
+
   e.preventDefault();
+    if (miniQuery.select("#badges")) {
+      console.log("badges");
+    miniQuery.remove("#badges");
+  };
+  var element = this.parentNode;
   var url = this.getAttribute('href');
+
   miniQuery.request({
     type: "GET",
     url: url
   }).then(function(response){
-    console.log(response);
+    var badges = {badges: response};
+    listBadges(badges, element);
   }).catch (function(error) {
     console.log(error);
   })
+}
+
+var listBadges = function(badges, element){
+
+  var theBadgesScript = miniQuery.select("#badges-template").innerHTML;
+  var theBadgesTemplate = Handlebars.compile(theBadgesScript);
+  var theCompiledBadges = theBadgesTemplate(badges);
+  var div = document.createElement('div');
+  div.id = "badges";
+  div.innerHTML = theCompiledBadges;
+  element.appendChild(div);
 }
