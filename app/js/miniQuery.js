@@ -30,7 +30,6 @@
      select(element).style.visibility = 'visible';
     };
   var remove = function(element){
-    console.log ("removing");
     select(element).parentNode.removeChild(select(element));
   }
   var addClass = function(element, klass){
@@ -74,6 +73,7 @@
     return new Promise(function(resolve, reject){
       var xhr = new XMLHttpRequest();
       xhr.open(ajaxObject.type, ajaxObject.url, true);
+      xhr.setRequestHeader("Content-type","application/json")
       xhr.onload = function(){
         if (xhr.status >= 200 && xhr.status < 306 ){
           resolve(JSON.parse(xhr.responseText));
@@ -85,8 +85,8 @@
       xhr.onerror = function(){
         reject(Error("Network Error"));
       };
-      console.log('"'+ajaxObject.data+'"')
-      xhr.send('"'+ajaxObject.data+'"');
+      data = JSON.stringify(ajaxObject.data);
+      xhr.send(data);
     });
   }
   var ready = function (callback) {

@@ -29,10 +29,7 @@ var listTeachers = function(teachers){
 var pullBadges = function(e){
 
   e.preventDefault();
-    if (miniQuery.select("#badges")) {
-      console.log("badges");
-    miniQuery.remove("#badges");
-  };
+
   var element = this.parentNode;
   var url = this.getAttribute('href');
 
@@ -48,7 +45,9 @@ var pullBadges = function(e){
 }
 
 var listBadges = function(badges, element){
-
+  if (miniQuery.select("#badges")) {
+    miniQuery.remove("#badges");
+  };
   var theBadgesScript = miniQuery.select("#badges-template").innerHTML;
   var theBadgesTemplate = Handlebars.compile(theBadgesScript);
   var theCompiledBadges = theBadgesTemplate(badges);
@@ -61,15 +60,18 @@ var listBadges = function(badges, element){
 
 var vote = function(e){
   e.preventDefault();
+  var element = this.parentNode.parentNode.parentNode;
+  console.log(element);
   var url = this.children[0].getAttribute('action');
   var direction = this.children[0].children[1].getAttribute('value');
-  var data = "vote:" + direction;
+  var data = {badge:{vote: direction}};
   miniQuery.post({
     type: "put",
     url: url,
     data: data
   }).then (function(response){
-    console.log(response)
+    var badges = {badges: response};
+    listBadges(badges, element);
   }).catch (function(error){
     console.log(error);
   })
