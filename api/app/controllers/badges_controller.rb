@@ -13,7 +13,7 @@ class BadgesController < ApplicationController
     else
       @badge.downvote
     end
-    @badges = Badge.where(teacher_id: params[:teacher_id])
+    @badges = Badge.where(teacher_id: params[:teacher_id]).order(points: :desc, created_at: :asc)
     render json: @badges
   end
  private

@@ -7,7 +7,7 @@ class TeachersController < ApplicationController
 
   def show
     @teacher = Teacher.find(params[:id])
-    @badges = Badge.where(:teacher_id => params[:id])
+    @badges = Badge.where(:teacher_id => params[:id]).order(points: :desc, created_at: :asc)
     render json: @badges
   end
 end
