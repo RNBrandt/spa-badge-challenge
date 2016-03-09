@@ -5,6 +5,7 @@ class BadgesController < ApplicationController
   end
 
   def update
+    puts params
     @badge = Badge.find(params[:id])
     if params[:vote] == 'up' #this will be the vote button class
       @badge.upvote

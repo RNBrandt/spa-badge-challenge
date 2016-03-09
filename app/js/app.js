@@ -56,4 +56,19 @@ var listBadges = function(badges, element){
   div.id = "badges";
   div.innerHTML = theCompiledBadges;
   element.appendChild(div);
+  miniQuery.onClass('.vote-on', "submit", vote)
 }
+
+var vote = function(e){
+  e.preventDefault();
+  var url = this.children[0].getAttribute('action');
+  var direction = this.children[0].children[1].getAttribute('value');
+  miniQuery.request({
+    type: "PATCH",
+    url: url
+  }).then (function(response){
+    console.log(response)
+  }).catch (function(error){
+    console.log(error);
+  })
+};

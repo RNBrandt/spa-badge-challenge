@@ -58,6 +58,7 @@
       xhr.open(ajaxObject.type, ajaxObject.url);
       xhr.onload = function(){
         if (xhr.status >= 200 && xhr.status < 306 ){
+          console.log (xhr.responseText);
           resolve(JSON.parse(xhr.responseText));
         }
         else {
@@ -70,6 +71,7 @@
       xhr.send();
     });
   }
+
   var ready = function (callback) {
     switch (document.readyState) {
       case "loading" :
