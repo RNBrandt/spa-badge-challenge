@@ -13,7 +13,7 @@
   };
   var select = function (selector) {
     if (selector[0]=== ".") {
-    return  elementsByClassName(selector.substring(1))[0];
+    return  elementsByClassName(selector.substring(1));
           }
     else if (selector[0]=== "#") {
       return elementById(selector.substring(1));
@@ -39,6 +39,12 @@
   var on = function (element, eventName, eventFunction){
     select(element).addEventListener(eventName, eventFunction);
   };
+  var onClass = function (elements, eventName, eventFunction){
+    var className = select(elements);
+    for (var i =0 ; i < className.length; i++){
+      className[i].addEventListener(eventName, eventFunction);
+    }
+  };
   var trigger= function (element, eventName) {
     var event = new Event(eventName);
     select(element).dispatchEvent(event);
@@ -48,8 +54,8 @@
       var xhr = new XMLHttpRequest();
       xhr.open(ajaxObject.type, ajaxObject.url);
       xhr.onload = function(){
-        if (xhr.status >= 200 && xhr.status < 300 ){
-          resolve();
+        if (xhr.status >= 200 && xhr.status < 306 ){
+          resolve(JSON.parse(xhr.responseText));
         }
         else {
           reject();
@@ -123,6 +129,7 @@
       addClass: addClass,
       removeClass: removeClass,
       on: on,
+      onClass: onClass,
       trigger: trigger,
       request: request,
       ready: ready,
