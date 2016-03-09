@@ -51,12 +51,11 @@
   </div>
 </div>
 {{/each}}
-
 <div class="add-badge">
   <h3> Add a Badge: </h3>
-  <form action="#">
-    <input type="hidden" name="teacher_id" value={{teacher_id}} />
-    <input type="text" name="content" />
+  <form action="http://localhost:3000/teachers/{{badges.1.teacher_id}}/badges">
+    <input type="hidden" name="teacher_id" value={{badges.1.teacher_id}}>
+    <input type="text" name="name" />
     <input type="image" src="img/add_button.png" alt="Add Slogan" />
   </form>
 </div>

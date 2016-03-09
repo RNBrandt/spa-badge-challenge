@@ -56,6 +56,7 @@ var listBadges = function(badges, element){
   div.innerHTML = theCompiledBadges;
   element.appendChild(div);
   miniQuery.onClass('.vote-on', "submit", vote)
+  miniQuery.onClass('.add-badge', 'submit', newBadge)
 }
 
 var vote = function(e){
@@ -76,3 +77,25 @@ var vote = function(e){
     console.log(error);
   })
 };
+
+var newBadge = function(e){
+  e.preventDefault()
+  var element = this.parentNode.parentNode;
+  var url = this.children[1].getAttribute('action')
+  console.log(url);
+  var name = this.children[1].children[1].value;
+  var teacher_id = this.children[1].children[0].value;
+  console.log(name);
+  var data = {badge:{name: name, teacher_id: teacher_id}};
+  console.log(data)
+  miniQuery.post({
+    type: "POST",
+    url: url,
+    data: data
+  }).then(function(response){
+    var badges = {badges: response};
+    listBadges(badges, element);
+  }).catch (function(error){
+    console.log(error);
+  })
+}

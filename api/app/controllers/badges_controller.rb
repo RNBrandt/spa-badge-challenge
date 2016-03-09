@@ -1,7 +1,10 @@
 class BadgesController < ApplicationController
 
   def create
-    @badge = Badge.new(:name => params[:name])
+    @badge = Badge.create!(badge_params)
+    p badge_params
+    @badges = Badge.where(teacher_id: params[:teacher_id]).order(points: :desc, created_at: :asc)
+    render json: @badges
   end
 
   def update
