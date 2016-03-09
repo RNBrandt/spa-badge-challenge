@@ -58,7 +58,6 @@
       xhr.open(ajaxObject.type, ajaxObject.url);
       xhr.onload = function(){
         if (xhr.status >= 200 && xhr.status < 306 ){
-          console.log (xhr.responseText);
           resolve(JSON.parse(xhr.responseText));
         }
         else {
@@ -71,7 +70,25 @@
       xhr.send();
     });
   }
-
+  var post = function(ajaxObject){
+    return new Promise(function(resolve, reject){
+      var xhr = new XMLHttpRequest();
+      xhr.open(ajaxObject.type, ajaxObject.url, true);
+      xhr.onload = function(){
+        if (xhr.status >= 200 && xhr.status < 306 ){
+          resolve(JSON.parse(xhr.responseText));
+        }
+        else {
+          reject();
+        }
+      };
+      xhr.onerror = function(){
+        reject(Error("Network Error"));
+      };
+      console.log('"'+ajaxObject.data+'"')
+      xhr.send('"'+ajaxObject.data+'"');
+    });
+  }
   var ready = function (callback) {
     switch (document.readyState) {
       case "loading" :
@@ -113,6 +130,7 @@
       onClass: onClass,
       trigger: trigger,
       request: request,
+      post: post,
       ready: ready,
       append: append,
       remove: remove,

@@ -63,9 +63,11 @@ var vote = function(e){
   e.preventDefault();
   var url = this.children[0].getAttribute('action');
   var direction = this.children[0].children[1].getAttribute('value');
-  miniQuery.request({
-    type: "PATCH",
-    url: url
+  var data = "vote:" + direction;
+  miniQuery.post({
+    type: "put",
+    url: url,
+    data: data
   }).then (function(response){
     console.log(response)
   }).catch (function(error){

@@ -5,6 +5,7 @@ class BadgesController < ApplicationController
   end
 
   def update
+    puts "-----"
     puts params
     @badge = Badge.find(params[:id])
     if params[:vote] == 'up' #this will be the vote button class
@@ -12,6 +13,8 @@ class BadgesController < ApplicationController
     else
       @badge.downvote
     end
+    @badges = Badge.where(teacher_id: params[:teacher_id])
+    render json: @badges
   end
 
 end
